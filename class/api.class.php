@@ -1,46 +1,46 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Meo Wallet API
+ *
+ * Provides a Meo Wallet Standard Payment Gateway for WooCommerce
+ *
+ * @class 		MEOWallet_API
+ * @version     0.1
+ * @license     GPLv3
+ * @author 		WebDS
  */
-
 class MEOWallet_API {
 
     protected $_endpoint = '{{ DOMAIN }}/{{ RESOURCE }}';
     protected $_domain = '';
-    protected $_authToken = '';
+    protected $_apikey = '';
     protected $_args = array();
     protected $_resource = '';
     protected $_url = '';
 
     /*
-     * Initialize the and store the domain/token for making requests
-     *
-     * @param string $domain The subdomain like 'yoursite'.freshbooks.com
-     * @param string $token The token found in your account settings area
-     * @return null
+     * Initialize the and store the domain & apikey for making requests
      */
 
-    public function __construct($domain, $authToken) {
+    public function __construct($domain, $apikey) {
         if (!extension_loaded('curl')) {
             die('CURL extension not found!');
         }
         $this->_domain = $domain;
-        $this->_authToken = $authToken;
+        $this->_apikey = $apikey;
     }
 
-    /*
+    /**
      * Set the data/arguments we're about to request with
-     *
-     * @return null
+     * @string $resource - POST Resources - https://developers.wallet.pt/en/procheckout/resources.html
+     * @params $data - Data params
+     * @return curl response
      */
-
     public function post($resource, $data) {
 
-        if (!$this->_domain || !$this->_authToken) {
-            WC_MEOWALLET_GW::log('You need to call MEOWallet_API($domain, $authToken) with your domain and Authentication Token.');
+        if (!$this->_domain || !$this->_apikey) {
+            WC_MEOWALLET_GW::log('You need to call MEOWallet_API($domain, $apikey) with your domain and Authentication Token.');
         }
 
         $verify = false;
@@ -67,13 +67,13 @@ class MEOWallet_API {
         return $this->request($encode, $verify);
     }
 
-    public function get($resource, $data) {
-        $this->_args = $data;
-    }
-
+    /**
+     * Make the curl Request
+     * @bool $post - request a HTTP POST
+     * @bool $verify - Used for callback/verify only 
+     * @return curl response
+     */
     public function request($post = true, $verify = false) {
-
-
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
@@ -107,9 +107,13 @@ class MEOWallet_API {
         }
     }
 
+    /**
+     * Set the HEADER information
+     * @return array
+     */
     public function header() {
         return array(
-            'Authorization: WalletPT ' . $this->_authToken,
+            'Authorization: WalletPT ' . $this->_apikey,
             'Content-Type: application/json',
             'Content-Length: ' . strlen($this->_args)
         );

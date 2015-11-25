@@ -1,4 +1,15 @@
 <?php
+/**
+ * Meo Wallet Standard Payment Gateway
+ *
+ * Provides a Meo Wallet Standard Payment Gateway for WooCommerce
+ *
+ * @class 		WC_MEOWALLET_GW
+ * @extends		WC_Payment_Gateway
+ * @version     0.1
+ * @license     GPLv3
+ * @author 		WebDS
+ */
 if (!defined('ABSPATH'))
     exit;
 
@@ -6,9 +17,6 @@ if (!class_exists("MEOWallet_API")) {
     require_once('api.class.php');
 }
 
-/**
- * Gateway class
- */
 class WC_MEOWALLET_GW extends WC_Payment_Gateway {
 
     /** @var boolean Whether or not logging is enabled */
@@ -19,6 +27,9 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
     protected $SANDBOX_URL = 'https://services.sandbox.meowallet.pt/api/v2';
     protected $WALLET_URL = 'https://services.wallet.pt/api/v2';
 
+    /**
+     * Constructor for the gateway.
+     */
     function __construct() {
         global $wallet;
 
@@ -71,22 +82,41 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
         }
     }
 
+    /**
+     * Initialise Gateway Settings Form Fields
+     */
     function init_form_fields() {
 
         $this->form_fields = include( plugin_dir_path(dirname(__FILE__)) . 'includes/settings-meowallet.php' );
     }
 
+    /**
+     * Admin Options
+     *
+     * Setup the gateway settings screen.
+     * Override this in your gateway.
+     *
+     * @since 1.0.0
+     */
     public function admin_options() {
-        $image_path = plugins_url('assets/images/mw_big.png', dirname(__FILE__));
+        $image_path = plugins_url('assets/images/mw.png', dirname(__FILE__));
         ?>
-        <!-- <h3><?php _e('MEO Wallet', 'meowallet'); ?></h3> -->
-        <?php echo "<a href=\"https://wallet.pt\"><img src=\"$image_path\" /></a>"; ?>
-        <p><?php _e('Pagamentos via MEO Wallet', 'meowallet'); ?></p>
+        <!-- <h3><?php _e('MEO Wallet', 'meowallet_wc'); ?></h3> -->
+        <a  class="webds_mf_logo" href="http://www.webds.pt" target="_blank"><img src="http://www.webds.pt/webds_logomail.png" alt="WebDS" /></a>
+        <center>
+            <?php echo "<a href=\"https://wallet.pt\"><img src=\"$image_path\" /></a>"; ?><br>
+            <small>by <a href="http://www.webds.pt" target="_blank">WebDS</a></small>
+        </center>
         <table class="form-table">
             <?php
             $this->generate_settings_html();
             ?>
         </table>
+        <div class="webds_mf_footer">
+            <?php _e('Uma empresa', 'meowallet_wc'); ?><br/>
+            <a href="https://www.webhs.pt"><img src="https://www.webhs.pt/logowebhs.png" alt="WebHS" /></a><br>
+            <?php _e('Soluções de alojamento web, registo de dominios e certificados SSL', 'meowallet_wc'); ?>
+        </div>
         <?php
     }
 
@@ -194,6 +224,9 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
         );
     }
 
+    /**
+     * Check for MEO Wallet Response
+     */
     function meowallet_callback() {
         global $wallet;
         @ob_clean();

@@ -1,5 +1,4 @@
 <?php
-
 /*
   Plugin Name: MEO WALLET WooCommerce
   Plugin URI: https://www.webds.pt

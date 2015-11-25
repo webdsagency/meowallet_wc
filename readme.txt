@@ -42,5 +42,5 @@ Users will be redirected to MEO Wallet website where can pay via Wallet, Multiba
 
 == Changelog ==
 
-= 0.1 =
+= 1.0 =
 Just released into the wild.

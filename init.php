@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: MEO Wallet WC
+  Plugin Name: MEO Wallet Payment Gateway
   Plugin URI: https://www.webds.pt
   Description: MEO Wallet Payment Gateway is the best away to accept payments via MEO Wallet, Multibanco and Credit/Debit Card.
   Version: 1.0

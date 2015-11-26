@@ -1,4 +1,4 @@
-=== MEO Wallet WC ===
+=== MEO Wallet Payment Gateway ===
 Contributors: webds
 Donate link: https://www.webds.pt
 Tags: meowallet,meo wallet, payment, gateway, woocommerce

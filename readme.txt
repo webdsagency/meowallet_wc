@@ -8,15 +8,14 @@ Stable tag: 1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.en.html
 
-MEO Wallet is a plugin for Wordpress/WooCommerce that provids possibility for marchants to accept payments from Wallet.pt
+MEO Wallet WC is a plugin for WooCommerce that provids possibility for merchants to accept payments from Wallet.pt
 
  == Description ==
  
-MEO Wallet is a plugin for Wordpress/WooCommerce that provides possibility to merchants accept payment from Wallet.pt.
+MEO Wallet WC Plugin is a payment gateway for WooCommerce.
+Users will be redirected to MEO Wallet website where they can pay via Wallet, Multibanco (The Portuguese payment method) and VISA or MASTERCARD.
 
-The main purpose of MEO Wallet WC Plugin is to act as payment gateway for WooCommerce.
-Users will be redirected to MEO Wallet website where can pay via Wallet, Multibanco (The Portuguese payment method), VISA/MASTERCARD.
-
+Checkout our portfolio at: http://www.webds.pt
 
 == Installation ==
 

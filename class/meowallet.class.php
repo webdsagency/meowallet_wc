@@ -6,7 +6,7 @@
  *
  * @class 		WC_MEOWALLET_GW
  * @extends		WC_Payment_Gateway
- * @version     0.1
+ * @version     0.2
  * @license     GPLv3
  * @author 		WebDS
  */
@@ -111,7 +111,22 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
             <?php
             $this->generate_settings_html();
             ?>
+            <tr valign="top">
+                <th class="titledesc" scope="row">
+                    <label><?php _e('Callback url', 'meowallet_wc'); ?></label>
+                </th>
+                <td class="forminp">
+                    <fieldset>
+                        <legend class="screen-reader-text"><span><?php _e('Callback url', 'meowallet_wc'); ?></span></legend>
+                        <p><strong><?php echo get_site_url(); ?>/clientes/modules/gateways/callback/meowallet.php</strong></p>
+                        <br>
+                        <p class="description"><?php _e('MEO Wallet notifies you of changes in the status of a transaction via callbacks to your site. The callback endpoint for your site is configured on the merchant backoffice in the Edit Wallet section.', 'meowallet_wc'); ?></p>
+                        <p>login on <strong>Meo Wallet</strong> > <strong>O meu negócio</strong> > <strong>Editar Wallet</strong>, Url de Callback</p>
+                    </fieldset>
+                </td>
+            </tr>
         </table>
+
         <div class="webds_mf_footer">
             <?php _e('Uma empresa', 'meowallet_wc'); ?><br/>
             <a href="https://www.webhs.pt"><img src="https://www.webhs.pt/logowebhs.png" alt="WebHS" /></a><br>

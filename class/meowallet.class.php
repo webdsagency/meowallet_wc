@@ -6,7 +6,7 @@
  *
  * @class 		WC_MEOWALLET_GW
  * @extends		WC_Payment_Gateway
- * @version     0.2
+ * @version     0.3
  * @license     GPLv3
  * @author 		WebDS
  */
@@ -118,7 +118,7 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
                 <td class="forminp">
                     <fieldset>
                         <legend class="screen-reader-text"><span><?php _e('Callback url', 'meowallet_wc'); ?></span></legend>
-                        <p><strong><?php echo get_site_url(); ?>/clientes/modules/gateways/callback/meowallet.php</strong></p>
+                        <p><strong><?php echo get_site_url(); ?>/wc-api/wc_gateway_meowallet</strong></p>
                         <br>
                         <p class="description"><?php _e('MEO Wallet notifies you of changes in the status of a transaction via callbacks to your site. The callback endpoint for your site is configured on the merchant backoffice in the Edit Wallet section.', 'meowallet_wc'); ?></p>
                         <p>login on <strong>Meo Wallet</strong> > <strong>O meu negócio</strong> > <strong>Editar Wallet</strong>, Url de Callback</p>
@@ -160,12 +160,12 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
         if (sizeof($order->get_items()) > 0) {
             foreach ($order->get_items() as $item) {
 
-                if ($item['qty']) {
+                if ((int)$item['qty']>0) {
                     $client_items = array();
                     $client_items['id'] = $item['product_id'];
                     $client_items['name'] = $item['name'];
                     $client_items['descr'] = '';
-                    $client_items['qt'] = $item['qty'];
+                    $client_items['qt'] = (int) $item['qty'];
 
                     $items[] = $client_items;
                 }
@@ -175,7 +175,7 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
             $items[] = array(
                 'id' => 'shippingfee',
                 'price' => $order->get_total_shipping(),
-                'quantity' => 1,
+                'qt' => 1,
                 'name' => 'Shipping Fee',
             );
         }
@@ -183,7 +183,7 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
             $items[] = array(
                 'id' => 'taxfee',
                 'price' => $order->get_total_tax(),
-                'quantity' => 1,
+                'qt' => 1,
                 'name' => 'Tax',
             );
         }
@@ -191,7 +191,7 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
             $items[] = array(
                 'id' => 'totaldiscount',
                 'price' => $order->get_total_discount() * -1,
-                'quantity' => 1,
+                'qt' => 1,
                 'name' => 'Total Discount'
             );
         }
@@ -202,7 +202,7 @@ class WC_MEOWALLET_GW extends WC_Payment_Gateway {
                 $items[] = array(
                     'id' => 'itemfee' . $i,
                     'price' => $item['line_total'],
-                    'quantity' => 1,
+                    'qt' => 1,
                     'name' => $item['name'],
                 );
                 $i++;

@@ -3,8 +3,8 @@ Contributors: webds
 Donate link: https://www.webds.pt
 Tags: meowallet,meo wallet, payment, gateway, woocommerce
 Requires at least: 3.0.1
-Tested up to: 4.3.1
-Stable tag: 1.1
+Tested up to: 4.4
+Stable tag: 1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -40,6 +40,10 @@ Checkout our portfolio at: http://www.webds.pt
 
 
 == Changelog ==
+
+= 1.1.1 =
+Fixed Wrong back url information, now showing correct url
+Updated meowallet API call
 
 = 1.1 =
 Added call back url for information
